@@ -1,13 +1,24 @@
+require 'optparse'
 require 'csv'
 require 'RMagick'
 include Magick
 
-KIGYOS_CSV_FILE_NAME = 'comiket_87.csv'
-EXPORT_CSV_FILE_NAME = 'export_comiket_87.csv'
+option = {}
+
+OptionParser.new do |opt|
+  opt.on('--comiket_id=VALUE', 'コミケID') { |v| option[:comiket_id] = v }
+  opt.parse!(ARGV)
+end
+
+p option
+
+COMIKET_ID = option[:comiket_id]
+KIGYOS_CSV_FILE_NAME = "comiket_#{COMIKET_ID}.csv"
+EXPORT_CSV_FILE_NAME = "export_comiket_#{COMIKET_ID}.csv"
 FONT_PATH = '/Library/Fonts/ヒラギノ丸ゴ Pro W4.otf'
 
 IMAGE_BACKGROUND_COLOR = 'white'
-IMAGE_FILE_NAME = 'comiket_87.png'
+IMAGE_FILE_NAME = "comiket_#{COMIKET_ID}.png"
 IMAGE_MARGIN = 30
 
 BOOTH_WIDTH = 36
